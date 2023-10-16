@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/css/style.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Crimson+Text:ital@1&family=Kanit:wght@200&family=Roboto:ital,wght@1,700&display=swap" rel="stylesheet">
     <title>Web-API: Code Quiz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Crimson+Text:ital@1&family=Kanit:wght@200&family=Roboto:ital,wght@1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/style.css" />
     
 
 </head>
 <body>
     <div class="scoreboard"><a href="score.html">View Highscores</a></div>
 
-    <div class="timer">Time: 
+    <div class="timer">Time: <span id="time">0</span></div>
 
     <div class="wrapper">
       <div id="start-menu" class="start">
@@ -23,7 +23,7 @@
         <button id="start-button">Start Quiz</button>
       </div>
   <!-- Quiz containers once you click start -->
-    <div id="questions" class="hid">
+    <div id="questions" class="hide">
       <h2 id="question-title"></h2>
       <div id="choices" class="choices"></div>
     </div>
@@ -35,5 +35,8 @@
         <p>Enter your  initials: <input type="text" id="initials" max="3"/>
         <button id="submit">Submit</button></p>
     </div>
+
+    <script src="./assets/jss/questions.js"></script>
+    <script src="./assets/jss/script.js"></script>
 </body>
 </html>
