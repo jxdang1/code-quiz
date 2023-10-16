@@ -4,8 +4,9 @@ var choicesEl = document.querySelector("#choices");
 var submit = document.querySelector("#submit");
 var start = document.querySelector("#start");
 var yourName = document.querySelector("#initials");
+var feedback = document.querySelector("#feedback");
 
-var questionIndex = 0;
+var currentQuestionIndex = 0;
 var time = questions.length * 15;
 var timerId;
 
@@ -14,8 +15,8 @@ var timerId;
 function startQuiz() {
 
     //when you click the start button, it hides the start screeen
-    var startScreen = document.getElementById("start-screen");
-    startScreen.setAttribute("class", "hide");
+    var startScreenEl = document.getElementById("start-screen");
+    startScreenEl.setAttribute("class", "hide");
 
     //show questions after clicking start
     questions.removeAttribute("class");
@@ -37,6 +38,7 @@ function getQuestions() {
     choicesEl.innerHTML = "";
 
     currentQuestion.choices.forEach(function(choice, i) {
+        //creates button for each choice
         var choiceBtn = document.createElement("button");
         choiceBtn.setAttribute("class", "choice");
         choiceBtn.setAttribute("value", choice);
@@ -51,15 +53,22 @@ function getQuestions() {
 
 function clickQuestion () {
     //if user answers wrong, it takes 10 seconds away from total amount of time
-    if (this.value !== question[currentQuestionIndex].answer) {
+    if (this.value !== questions[currentQuestionIndex].answer) {
         time -=10;
 
         if (time < 0) {
             time = 0;
+        } 
+        timer.textContent = time;
+        feedback.textContent = "Incorrect";
+    } else {
+        feedback.textContent = "Correct";
         }
-
-    }
-}
+//shows the word correct or incorrect when selecting answer choices
+feedback.setAttribut("class", "feedback");
+setTimeout(function() {
+    feedback.setAttribute("class", "feedback hide");
+}, 1000);
 
 //goes to next question
 
@@ -67,12 +76,13 @@ currentQuestionIndex++;
 
 //checks the time
 
-if (currentQuestionIndex === questions.length) {
-    quizEnd();
-} else {
-    getQuestions();
+    if (currentQuestionIndex === questions.length) {
+         quizEnd();
+    } else {
+        getQuestions();
 }
 
+}
 //when the timer stops, it will show the end screen
 
 function quizEnd() {
@@ -91,6 +101,19 @@ function quizEnd() {
     questions.setAttribute("class", "hide");
 
 }
+
+//function that will update the time
+
+function clockTick() {
+    time--;
+    timer.textContent = time;
+
+    if (time <=0) {
+        quizEnd();
+    }
+}
+
+//saves score into local storage when quiz is complete
 
 function saveHighscore() {
     //input box value
