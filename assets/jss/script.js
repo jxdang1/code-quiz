@@ -1,6 +1,6 @@
 var questions = document.querySelector("#questions");
 var timer = document.querySelector("#time");
-var choices = document.querySelector("#choices");
+var choicesEl = document.querySelector("#choices");
 var submit = document.querySelector("#submit");
 var start = document.querySelector("#start");
 var yourName = document.querySelector("#initials");
@@ -12,11 +12,18 @@ var timerId;
 
 
 function startQuiz() {
-    timerId = setInterval(clockTick, 1000);
+
+    //when you click the start button, it hides the start screeen
+    var startScreen = document.getElementById("start-screen");
+    startScreen.setAttribute("class", "hide");
+
+    //show questions after clicking start
+    questions.removeAttribute("class");
 
     //when you click the start button, it shows the start timer
-
+    timerId = setInterval(clockTick, 1000);
     timer.textContent = time;
+
     getQuestions();
 }
 
@@ -27,7 +34,7 @@ function getQuestions() {
     var title = document.getElementById("question-title");
     title.textContent = currentQuestion.title;
 
-    choices.innerHTML = "";
+    choicesEl.innerHTML = "";
 
     currentQuestion.choices.forEach(function(choice, i) {
         var choiceBtn = document.createElement("button");
@@ -38,13 +45,13 @@ function getQuestions() {
 
         choiceBtn.onclick = clickQuestion;
 
-        choices.appendChilt(choiceBtn);
+        choicesEl.appendChild(choiceBtn);
     });
 }
 
 function clickQuestion () {
     //if user answers wrong, it takes 10 seconds away from total amount of time
-    if (this. value !== question[currentQuestionIndex].answer) {
+    if (this.value !== question[currentQuestionIndex].answer) {
         time -=10;
 
         if (time < 0) {
@@ -102,4 +109,28 @@ function saveHighscore() {
         score: time,
         initials: initials
     };
+    
+    // save to local storage
+
+    highscore.push(newScore);
+    window.localStorage.setItem("highscore", JSON.stringify(highscore));
+
+    //goes to the next screen for score
+    window.location.href = "score.html" ;
+
 }
+
+//function to save highscore with your initials
+function checkEnter(event) {
+    if (event.key === "Enter") {
+        saveHighscore();
+    }
+}
+
+//submit initials
+submitBtn.onclick = saveHighscore;
+
+//start quiz
+startBtn.onclick = startQuiz;
+
+initials.onkeyup = checkEnter;
