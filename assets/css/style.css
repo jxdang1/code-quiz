@@ -1,0 +1,22 @@
+* {
+    font-family: 'Abril Fatface', serif;
+    font-family: 'Crimson Text', serif;
+    font-family: 'Kanit', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins', sans-serif;
+}
+
+.wrapper {
+    margin: 100px auto 0 auto;
+    max-width: 600px;
+}
+
+.hide {
+    display: none;
+}
+
+.scores {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
