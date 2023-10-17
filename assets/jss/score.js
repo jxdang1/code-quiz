@@ -1,5 +1,5 @@
 
-function printHighscore(){
+function showHighscore(){
     var highscores = JSON.parse(window.localStorage.getItem("highscores")) || [];
 
     highscores.sort(function(a, b) {
@@ -26,5 +26,5 @@ document.getElementById("clear").onclick = clearHighScores;
 
 
 //displays the function when page is loaded
-printHighscore();
+showHighscore();
 

@@ -34,7 +34,7 @@ function getQuestions() {
     //receives the question object from array
     var currentQuestion = questions[currentQuestionIndex];
 
-    var titleEl = document.getElementById("question-title");
+    var titleEl = document.getElementById("question-header");
     titleEl.textContent = currentQuestion.title;
     
     //clears question choices
@@ -63,7 +63,7 @@ function clickQuestion () {
         if (time < 0) {
           time = 0;
         }
-        // display new time on page
+        // display incorrect/correct under question container when user chooses an answer
         timerEl.textContent = time;
         feedbackEl.textContent = "Incorrect";
         feedbackEl.style.color = "red";
@@ -75,7 +75,7 @@ function clickQuestion () {
 feedbackEl.setAttribute("class", "feedback");
 setTimeout(function() {
     feedbackEl.setAttribute("class", "feedback hide");
-}, 1000);
+}, 500);
 
 //goes to next question
 
@@ -105,7 +105,7 @@ function quizEnd() {
     finalScore.textContent = time;
 
     //on end screen, hides questions 
-    questions.setAttribute("class", "hide");
+    //questions.setAttribute("class", "hide");
 
 }
 
@@ -115,7 +115,7 @@ function clockTick() {
     time--;
     timerEl.textContent = time;
 
-    if (time <=0) {
+    if (time <= 0) {
         quizEnd();
     }
 }
