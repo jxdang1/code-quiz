@@ -4,7 +4,6 @@ function showHighscore(){
 
     highscores.sort(function(a, b) {
         return b.score - a.score;
-
     });
 
 //creates an ol li tag for each users to organize scores in descending order from highest to lowest
