@@ -10,15 +10,13 @@
 
 </head>
 <body>
-    <div class="scoreboard"><a href="score.html">View Highscores</a></div>
-
     <div class="timer">Time: <span id="time">0</span></div>
 
     <div class="wrapper">
       <div id="start-screen" class="start">
         <h1>Coding Quiz Challenge</h1>
         <p>
-          Welcome to our code! Answer them all as quickly as you can and try to get the highest score! If you answer incorrectly, the timer will go down by 10 seconds! Good luck! 
+          Welcome to our my code quiz! Answer them all as quickly as you can and try to get the highest score! If you answer incorrectly, the timer will go down by 10 seconds! Good luck! 
         </p>
         <button id="start">Start Quiz</button>
       </div>
@@ -35,8 +33,10 @@
         <p>Enter your  initials: <input type="text" id="initials" max="3"/>
         <button id="submit">Submit</button></p>
     </div>
-
+<!-- whenever you answer a question, it will pop up if answer is correct or incorrect -->
     <div id="feedback" class="feedback hide"></div>
+    <!-- displays score in another screen -->
+    <div class="scores"><a href="score.html">View Highscores</a></div>
 
     <script src="./assets/jss/questions.js"></script>
     <script src="./assets/jss/script.js"></script>

@@ -3,6 +3,7 @@
     font-family: 'Crimson Text', serif;
     font-family: 'Kanit', sans-serif;
     font-family: 'Roboto', sans-serif;
+    background-color: blanchedalmond;
 }
 
 .wrapper {
@@ -30,14 +31,18 @@
     border-top: 2px solid rgb(201, 193, 193); 
 }
 
+/* made timer bigger for better visibility for users */
 .timer {
     position: absolute;
     top: 10px;
     right: 10px;
+    font-weight: 800;
+    font-size: 30px;
 }
 
-a {
-    color: black;
+/* made "view highscore" more visible for users*/
+a:hover {
+    color: rgb(245, 39, 217);
     text-decoration: none;
     transition: color 0.1s;
 }
@@ -47,7 +52,7 @@ button {
     margin: 5px;
     cursor: pointer;
     font-size: 100%;
-    background-color: teal;
+    background-color: rgb(19, 0, 128);
     border-radius: 5px;
     padding: 2px 10px;
     color: white;
@@ -73,11 +78,18 @@ ol {
     overflow: auto;   
 }
 
+
+#end-screen {
+    margin: 100px auto 0 auto;
+    max-width: 600px;
+}
+
 li {
     padding: 5px;
     list-style: decimal inside none;
 }
 
+/* highlights which user has the highest score */
 li:nth-child(odd) {
-    background-color: silver;
+    background-color: pink;
 }

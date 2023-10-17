@@ -1,10 +1,10 @@
-var questions = document.querySelector("#questions");
-var timer = document.querySelector("#time");
+var questionsEl = document.querySelector("#questions");
+var timerEl = document.querySelector("#time");
 var choicesEl = document.querySelector("#choices");
-var submit = document.querySelector("#submit");
-var start = document.querySelector("#start");
-var yourName = document.querySelector("#initials");
-var feedback = document.querySelector("#feedback");
+var submitButton = document.querySelector("#submit");
+var startButton = document.querySelector("#start");
+var yourInitials= document.querySelector("#initials");
+var feedbackEl = document.querySelector("#feedback");
 
 var currentQuestionIndex = 0;
 var time = questions.length * 15;
@@ -19,11 +19,11 @@ function startQuiz() {
     startScreenEl.setAttribute("class", "hide");
 
     //show questions after clicking start
-    questions.removeAttribute("class");
+    questionsEl.removeAttribute("class");
 
     //when you click the start button, it shows the start timer
     timerId = setInterval(clockTick, 1000);
-    timer.textContent = time;
+    timerEl.textContent = time;
 
     getQuestions();
 }
@@ -32,42 +32,47 @@ function getQuestions() {
     //receives the question object from array
     var currentQuestion = questions[currentQuestionIndex];
 
-    var title = document.getElementById("question-title");
-    title.textContent = currentQuestion.title;
-
+    var titleEl = document.getElementById("question-title");
+    titleEl.textContent = currentQuestion.title;
+    
+    //clears question choices
     choicesEl.innerHTML = "";
 
     currentQuestion.choices.forEach(function(choice, i) {
         //creates button for each choice
-        var choiceBtn = document.createElement("button");
-        choiceBtn.setAttribute("class", "choice");
-        choiceBtn.setAttribute("value", choice);
+        var choiceButton = document.createElement("button");
+        choiceButton.setAttribute("class", "choice");
+        choiceButton.setAttribute("value", choice);
 
-        choiceBtn.textContent = i + 1 + ". " + choice;
+        choiceButton.textContent = i + 1 + ". " + choice;
 
-        choiceBtn.onclick = clickQuestion;
+        choiceButton.onclick = clickQuestion;
 
-        choicesEl.appendChild(choiceBtn);
+        choicesEl.appendChild(choiceButton);
     });
 }
 
 function clickQuestion () {
     //if user answers wrong, it takes 10 seconds away from total amount of time
     if (this.value !== questions[currentQuestionIndex].answer) {
-        time -=10;
-
+        // penalize time
+        time -= 15;
+    
         if (time < 0) {
-            time = 0;
-        } 
-        timer.textContent = time;
-        feedback.textContent = "Incorrect";
-    } else {
-        feedback.textContent = "Correct";
+          time = 0;
         }
+        // display new time on page
+        timerEl.textContent = time;
+        feedbackEl.textContent = "Incorrect";
+        feedbackEl.style.color = "red";
+      } else {
+        feedbackEl.textContent = "Correct";
+        feedbackEl.style.color = "green";
+      }
 //shows the word correct or incorrect when selecting answer choices
-feedback.setAttribut("class", "feedback");
+feedbackEl.setAttribute("class", "feedback");
 setTimeout(function() {
-    feedback.setAttribute("class", "feedback hide");
+    feedbackEl.setAttribute("class", "feedback hide");
 }, 1000);
 
 //goes to next question
@@ -106,7 +111,7 @@ function quizEnd() {
 
 function clockTick() {
     time--;
-    timer.textContent = time;
+    timerEl.textContent = time;
 
     if (time <=0) {
         quizEnd();
@@ -117,14 +122,13 @@ function clockTick() {
 
 function saveHighscore() {
     //input box value
-    var initials = yourName.value.trim();
+    var initials = yourInitials.value.trim();
 
     if (initials !== "") {
         // from local storage, able to get saved scores and set it as an empty array
-        var highscore =
-        JSON.parse(window.localStorage.getItem("highscore")) || [];
+        var highscores =
+        JSON.parse(window.localStorage.getItem("highscores")) || [];
 
-    }
 
     //formats new score as an object for user
 
@@ -135,12 +139,12 @@ function saveHighscore() {
     
     // save to local storage
 
-    highscore.push(newScore);
-    window.localStorage.setItem("highscore", JSON.stringify(highscore));
+    highscores.push(newScore);
+    window.localStorage.setItem("highscores", JSON.stringify(highscores));
 
     //goes to the next screen for score
     window.location.href = "score.html" ;
-
+    }   
 }
 
 //function to save highscore with your initials
@@ -151,9 +155,8 @@ function checkEnter(event) {
 }
 
 //submit initials
-submitBtn.onclick = saveHighscore;
+submitButton.onclick = saveHighscore;
 
 //start quiz
-startBtn.onclick = startQuiz;
+startButton.onclick = startQuiz;
 
-initials.onkeyup = checkEnter;
