@@ -89,7 +89,7 @@ li {
     list-style: decimal inside none;
 }
 
-/* highlights which user has the highest score */
+/* makes every odd number of li tag the color pink */
 li:nth-child(odd) {
     background-color: pink;
 }

@@ -46,4 +46,9 @@ var questions = [
       choices: ["<ul>", "<ol>", "<li>", "<list>"],
       answer: "<ul>"
     },
+    {
+      title: "Which CSS selector is used to select all elements on a web page?",
+      choices: ["!",".","#","*"],
+      answer: "*"
+    }
 ]

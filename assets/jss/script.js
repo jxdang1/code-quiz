@@ -7,7 +7,9 @@ var yourInitials= document.querySelector("#initials");
 var feedbackEl = document.querySelector("#feedback");
 
 var currentQuestionIndex = 0;
-var time = questions.length * 15;
+
+//total time of quiz overall (there are 10 questions, therefore, 100 seconds in total )
+var time = questions.length * 10;
 var timerId;
 
 
